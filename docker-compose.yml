@@ -1,0 +1,13 @@
+version: "2"
+
+services:
+  lineage-builder:
+    restart: "no"
+    image: lineage:v1.0
+    container_name: lineage_builder
+    environment:
+      - container=docker
+    volumes:
+      - $PWD/lineage:/home/build/android/lineage:Z
+      - $PWD/system:/home/build/android/system:Z
+      - $PWD/ccache:/srv/ccache:Z

@@ -63,4 +63,4 @@ USER build
 WORKDIR /home/build/android/lineage
 
 ENTRYPOINT ["/home/build/build.sh"]
-CMD ["lineage-16.0", "i9300"]
+CMD ["lineage-16.0", "samsung", "i9300", "cm-14.1"]
