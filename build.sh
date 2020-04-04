@@ -17,12 +17,14 @@ repo sync
 
 # Fix environment variables
 . build/envsetup.sh
-ln -s lineage/vendor/lineage lineage/vendor/cm
-export ROOMSERVICE_BRANCHES="$4"
+#ln -s lineage/vendor/lineage lineage/vendor/cm
+#export ROOMSERVICE_BRANCHES="$4"
+export ANDROID_JACK_VM_ARGS="-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4G"
 
 # Extract Binary Blobs from firmware extract
-cd $HOME/android/lineage/device/$2/$3
-./extract-files.sh ~/android/system/
+#cd $HOME/android/lineage/device/$2/$3
+#./extract-files.sh ~/android/system/
+ln -s $HOME/android/samsung $HOME/android/lineage/vendor/samsung
 
 # Start building
 cd $HOME/android/lineage
@@ -33,4 +35,4 @@ brunch $3
 
 # Exiting..
 cd $OUT
-printf "\nYour ROM file is $(ls *.zip)\n"
+printf "\nYour ROM file is $OUT/$(ls *.zip)\n"

@@ -45,7 +45,7 @@ RUN sed -i 's/main$/main universe/' /etc/apt/sources.list; \
         zlib1g-dev \
         android-tools-adb \
         android-tools-fastboot; \
-    apt-get -o Dpkg::Options::="--force-overwrite" install -y openjdk-9-jdk; \
+    apt-get -o Dpkg::Options::="--force-overwrite" install -y openjdk-8-jdk; \
     rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -U --uid 1000 build; \
@@ -56,11 +56,13 @@ RUN useradd -m -U --uid 1000 build; \
 RUN curl -k https://storage.googleapis.com/git-repo-downloads/repo > /home/build/bin/repo; \
     chmod a+x /home/build/bin/repo
 
-ADD build.sh /home/build/build.sh
+COPY --chown=build:build build.sh /home/build/build.sh
+ADD  --chown=build:build files/i9300_blobs.tar.xz /home/build/android/
+
 RUN chmod a+x /home/build/build.sh
 
 USER build
 WORKDIR /home/build/android/lineage
 
 ENTRYPOINT ["/home/build/build.sh"]
-CMD ["lineage-16.0", "samsung", "i9300", "cm-14.1"]
+CMD ["cm-14.1", "samsung", "i9300", "cm-14.1"]
